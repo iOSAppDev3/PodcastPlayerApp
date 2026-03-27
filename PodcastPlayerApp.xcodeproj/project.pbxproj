@@ -40,11 +40,6 @@
 			path = PodcastPlayerAppTests;
 			sourceTree = "<group>";
 		};
-		8364AE052F757AA6007A20B9 /* PodcastPlayerAppUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = PodcastPlayerAppUITests;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,7 +72,6 @@
 			children = (
 				8364ADEC2F757AA6007A20B9 /* PodcastPlayerApp */,
 				8364ADFB2F757AA6007A20B9 /* PodcastPlayerAppTests */,
-				8364AE052F757AA6007A20B9 /* PodcastPlayerAppUITests */,
 				8364ADEB2F757AA6007A20B9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -153,9 +147,6 @@
 			dependencies = (
 				8364AE042F757AA6007A20B9 /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				8364AE052F757AA6007A20B9 /* PodcastPlayerAppUITests */,
-			);
 			name = PodcastPlayerAppUITests;
 			packageProductDependencies = (
 			);
@@ -195,6 +186,8 @@
 			);
 			mainGroup = 8364ADE12F757AA6007A20B9;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 8364ADEB2F757AA6007A20B9 /* Products */;
 			projectDirPath = "";
