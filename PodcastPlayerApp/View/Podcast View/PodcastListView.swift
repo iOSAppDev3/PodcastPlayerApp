@@ -9,8 +9,11 @@ import SwiftUI
 
 struct PodcastListView: View {
     @StateObject private var viewModel: PodcastListViewModel
+    @StateObject private var playerViewModel = PodcastPlayerViewModel()
     private let podcastAPI: PodcastAPIProtocol
-
+    @Environment(\.colorScheme) private var colorScheme
+    @State private var showFullPlayer = false
+    
     private let columns = [
         GridItem(.flexible(), spacing: 16),
         GridItem(.flexible(), spacing: 16)
@@ -22,11 +25,14 @@ struct PodcastListView: View {
     }
     
     var body: some View {
-        NavigationStack {
+        ZStack {
+            AppGradients.appBackground(for: colorScheme)
+            
             ScrollView {
                 if viewModel.isLoading {
                     ProgressView("Loading Podcasts...")
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .foregroundColor(.white)
                 } else if let errorMessage = viewModel.errorMessage {
                     ContentUnavailableView(
                         "Something went wrong",
@@ -52,46 +58,13 @@ struct PodcastListView: View {
                     .padding()
                 }
             }
-            .navigationTitle("Podcasts")
-            .task {
-                if viewModel.podcastList.isEmpty {
-                    await viewModel.loadPodcastList()
-                }
-                
-            }
-            .background(
-                LinearGradient(
-                    colors: [
-                        Color.black,
-                        Color.purple
-                    ],
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
-            )
-            .shadow(color: Color.purple.opacity(0.15), radius: 10, x: 0, y: 6)
-            
         }
+        .navigationTitle("Podcasts")
+        .task {
+            if viewModel.podcastList.isEmpty {
+                await viewModel.loadPodcastList()
+            }
+        }
+        .toolbarBackground(.clear, for: .navigationBar)
     }
 }
-
-struct PodcastGridView : View {
-    let podcast: Podcast
-    
-    var body: some View {
-        VStack(spacing: 16) {
-            PodcastArtworkView(title: podcast.title, size: 155)
-                .padding(.top)
-            Text(podcast.title)
-                .font(.headline.bold())
-                .foregroundStyle(.white)
-                .multilineTextAlignment(.center)
-                .lineLimit(2)
-                .frame(height: 44)
-        }
-        .frame(maxWidth: .infinity, alignment: .topLeading)
-        .frame(height: 200)
-        .padding()
-        .clipShape(RoundedRectangle(cornerRadius: 16))
-    }
-}   
