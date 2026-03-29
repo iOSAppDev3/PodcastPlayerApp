@@ -8,11 +8,15 @@
 
 import SwiftUI
 
+enum AppConfig {
+    static let baseURLString = "https://the-podcasts.fly.dev"
+}
+
 enum AppGradients {
     static func appBackground(for colorScheme: ColorScheme) -> LinearGradient {
         if colorScheme == .dark {
             return LinearGradient(
-                colors: [.purple, .indigo, .black],
+                colors: [.purple, .indigo],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             )
@@ -20,8 +24,7 @@ enum AppGradients {
             return LinearGradient(
                 colors: [
                     .purple.opacity(0.4),
-                    .indigo.opacity(0.2),
-                    .white
+                    .indigo.opacity(0.2)
                 ],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing

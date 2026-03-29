@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct PodcastPlayerApp: App {
-    private let podcastAPI = PodcastAPI(baseURL: "https://the-podcasts.fly.dev")
+    private let podcastAPI = PodcastAPI(baseURL: AppConfig.baseURLString)
     
     var body: some Scene {
         WindowGroup {

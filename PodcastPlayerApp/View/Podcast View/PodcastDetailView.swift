@@ -10,13 +10,22 @@ import SwiftUI
 struct PodcastDetailView: View {
     @Environment(\.colorScheme) private var colorScheme
     let podcast: Podcast
+    let isCurrentEpisode: Bool
+    let isPlaying: Bool
     let onPlayTapped: () -> Void
+    
+    private var buttonIcon: String {
+        if isCurrentEpisode  {
+             return isPlaying ? "pause.fill" : "play.fill"
+         }
+        return "play.fill"
+     }
     
     var body: some View {
         ZStack {
             AppGradients.appBackground(for: colorScheme)
             VStack(spacing: 16) {
-                PodcastArtworkView(title: podcast.title, size: 120)
+                PodcastArtworkView(imageURLString: podcast.image, title: podcast.title, size: 200)
                 VStack(spacing: 6) {
                     Text(podcast.title)
                         .font(.headline.bold())
@@ -30,7 +39,7 @@ struct PodcastDetailView: View {
                     
                     Button(action: onPlayTapped) {
                         HStack(spacing: 8) {
-                            Image(systemName: "play.fill")
+                            Image(systemName: buttonIcon)
                             Text("Latest Episode")
                                 .font(.subheadline)
                                 .fontWeight(.medium)

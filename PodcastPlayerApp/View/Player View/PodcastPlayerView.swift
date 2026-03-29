@@ -7,6 +7,7 @@
 
 import SwiftUI
 import AVFoundation
+import Kingfisher
 
 struct PodcastPlayerView: View {
     @ObservedObject var playerViewModel: PodcastPlayerViewModel
@@ -31,24 +32,16 @@ struct PodcastPlayerView: View {
                 }
                 .padding(.top)
 
-                AsyncImage(url: URL(string: "https://hws.dev/paul2.jpg")) { image in
-                    image
-                        .resizable()
-                        .scaledToFit()
-                } placeholder: {
-                    Color.white.opacity(0.15)
-                }
-                .frame(width: 350, height: 350)
-                .clipShape(RoundedRectangle(cornerRadius: 20))
-
+                PodcastArtworkView(
+                    imageURLString: playerViewModel.currentPodcast?.image,
+                    title: "",
+                    size: 200
+                )
                 VStack(spacing: 8) {
-                    Text("Sample Track")
-                        .font(.title.bold())
+                    Text(playerViewModel.currentEpisode?.title ?? "No episode playing")
+                        .font(.headline.bold())
                         .foregroundColor(.primary)
-
-                    Text("Artist Name")
-                        .font(.title3)
-                        .foregroundColor(.secondary)
+                        .lineLimit(3)
                 }
 
                 VStack(spacing: 8) {

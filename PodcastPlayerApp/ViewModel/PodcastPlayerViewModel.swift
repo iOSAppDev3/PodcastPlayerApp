@@ -10,45 +10,86 @@ import AVFoundation
 final class PodcastPlayerViewModel: ObservableObject {
     /// Current playing episode
     @Published var currentEpisode: Episode?
+    /// Current playing podcast
+    @Published var currentPodcast: Podcast?
     /// Play/pause button state
     @Published var isPlaying = false
     /// Progress bar position
     @Published var currentTime: Double = 0
     /// Total length of the audio
     @Published var duration: Double = 0
+    @Published var errorMessage: String?
+    @Published var showErrorAlert = false
     /// Audio player
     private var player: AVPlayer?
     /// Listener that tracks playback progress
     private var timeObserver: Any?
+        
+    deinit {
+        removeTimeObserver()
+    }
+    
+    /// Function to check current episode
+    func isCurrentEpisode(_ episode: Episode) -> Bool {
+        currentEpisode?.id == episode.id
+    }
     
     /// Function to play an epsiode
-    func play(episode: Episode) {
+    @MainActor
+    func play(episode: Episode, podcast: Podcast) async throws {
+        currentPodcast = podcast
         currentEpisode = episode
-        loadAudio(for: episode)
+
+        do {
+            try await loadAudio(for: episode)
+            player?.play()
+            isPlaying = true
+            errorMessage = nil
+            showErrorAlert = false
+        } catch {
+            errorMessage = error.localizedDescription
+            showErrorAlert = true
+            isPlaying = false
+        }
+    }
+    
+    func pause() {
+        player?.pause()
+        isPlaying = false
+      }
+
+    func resume() {
+        player?.play()
         isPlaying = true
     }
 
     /// Function to load audio in the media player
-    func loadAudio(for episode: Episode) {
-        guard let url = URL(string:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3")!
-        player = AVPlayer(url: url)
-
-        if let player = player {
-            let asset =  AVURLAsset(url: url)
-            Task {
-                do {
-                    let duration = try await asset.load(.duration)
-                    await MainActor.run {
-                        ///  Converts CMTime to seconds (double)
-                        self.duration = CMTimeGetSeconds(duration)
-                    }
-                } catch {
-                    print("Failed to load duration: \(error)")
-                }
-            }
-
-            addTimeObserver(to: player)
+    func loadAudio(for episode: Episode) async throws {
+        // Episode url not available
+        guard let audioURLString = episode.url else {
+            throw PodcastAppError.invalidURL
         }
+        // Episode url is invalid
+        guard let url = URL(string: audioURLString) else {
+            throw PodcastAppError.invalidURL
+        }
+        
+        removeTimeObserver()
+        
+        let player = AVPlayer(url: url)
+        self.player = player
+        
+        let asset = AVURLAsset(url: url)
+        do {
+            let loadedDuration = try await asset.load(.duration)
+            await MainActor.run {
+                self.duration = CMTimeGetSeconds(loadedDuration)
+            }
+        } catch {
+            throw PodcastAppError.unknown(error)
+        }
+        
+        addTimeObserver(to: player)
     }
 
     /// Switches play and pause toggle
@@ -62,6 +103,26 @@ final class PodcastPlayerViewModel: ObservableObject {
         }
 
         isPlaying.toggle()
+    }
+    
+    /// Switches play and pause toggle for episode
+    func togglePlayback(for episode: Episode, podcast: Podcast) {
+        Task {
+            do {
+                if isCurrentEpisode(episode) {
+                    if isPlaying {
+                        pause()
+                    } else {
+                        resume()
+                    }
+                } else {
+                    try await play(episode: episode, podcast: podcast)
+                }
+            } catch {
+                errorMessage = error.localizedDescription
+                showErrorAlert = true
+            }
+        }
     }
 
     /// Moves forward or backward with min 0 and max duration +/- 10 seconds
@@ -99,11 +160,12 @@ final class PodcastPlayerViewModel: ObservableObject {
             self.currentTime = CMTimeGetSeconds(time)
         }
     }
-
+    
     /// Cleans up timeobserver
-    deinit {
-        if let timeObserver = timeObserver, let player = player {
+    private func removeTimeObserver() {
+        if let timeObserver, let player {
             player.removeTimeObserver(timeObserver)
+            self.timeObserver = nil
         }
     }
 }

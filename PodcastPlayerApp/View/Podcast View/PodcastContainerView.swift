@@ -41,5 +41,9 @@ struct PodcastContainerView: View {
         .sheet(isPresented: $showFullPlayer) {
             PodcastPlayerView(playerViewModel: playerViewModel)
         }
+        .toolbarBackground(.visible, for: .navigationBar)
+        .toolbarBackground(
+            AppGradients.appBackground(for: colorScheme)
+        )
     }
 }

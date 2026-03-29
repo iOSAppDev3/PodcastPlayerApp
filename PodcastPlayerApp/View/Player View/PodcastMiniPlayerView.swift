@@ -13,25 +13,16 @@ struct MiniPlayerView: View {
     var body: some View {
         VStack(spacing: 8) {
             HStack(spacing: 12) {
-                AsyncImage(url: URL(string: "https://hws.dev/paul2.jpg")) { image in
-                    image
-                        .resizable()
-                        .scaledToFill()
-                } placeholder: {
-                    Color.blue.opacity(0.2)
-                }
-                .frame(width: 60, height: 60)
-                .clipShape(RoundedRectangle(cornerRadius: 10))
+                PodcastArtworkView(imageURLString: playerViewModel.currentPodcast?.image, title: "", size: 60)
 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Sample Track")
+                    Text(playerViewModel.currentEpisode!.title)
                         .font(.subheadline.bold())
-                        .lineLimit(1)
+                        .lineLimit(2)
 
-                    Text("Artist Name")
+                    Text(playerViewModel.currentPodcast?.title ?? "")
                         .font(.caption)
                         .foregroundColor(.secondary)
-                        .lineLimit(1)
                 }
 
                 Spacer()

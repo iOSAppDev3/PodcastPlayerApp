@@ -12,11 +12,12 @@ struct PodcastGridView : View {
     
     var body: some View {
         VStack(spacing: 16) {
-            PodcastArtworkView(title: podcast.title, size: 155)
+            PodcastArtworkView(imageURLString: podcast.image,title: podcast.title, size: 150)
                 .padding(.top)
             Text(podcast.title)
                 .font(.headline.bold())
                 .foregroundStyle(.primary)
+                .tint(.primary)
                 .multilineTextAlignment(.center)
                 .lineLimit(2)
                 .frame(height: 44)

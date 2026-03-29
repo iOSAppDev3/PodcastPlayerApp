@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		8364B2482F783101007A20B9 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 8364B2472F783101007A20B9 /* Kingfisher */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		8364ADF92F757AA6007A20B9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -47,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8364B2482F783101007A20B9 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,6 +111,7 @@
 			);
 			name = PodcastPlayerApp;
 			packageProductDependencies = (
+				8364B2472F783101007A20B9 /* Kingfisher */,
 			);
 			productName = PodcastPlayerApp;
 			productReference = 8364ADEA2F757AA6007A20B9 /* PodcastPlayerApp.app */;
@@ -187,6 +193,7 @@
 			mainGroup = 8364ADE12F757AA6007A20B9;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
+				8364B2462F783101007A20B9 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 8364ADEB2F757AA6007A20B9 /* Products */;
@@ -576,6 +583,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8364B2462F783101007A20B9 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.8.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8364B2472F783101007A20B9 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8364B2462F783101007A20B9 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8364ADE22F757AA6007A20B9 /* Project object */;
 }

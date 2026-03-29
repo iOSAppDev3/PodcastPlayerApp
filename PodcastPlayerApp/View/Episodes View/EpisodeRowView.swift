@@ -9,7 +9,17 @@ import SwiftUI
 
 struct EpisodeRowView: View {
     let episode: Episode
+    let isCurrentEpisode: Bool
+    let isPlaying: Bool
     let onPlayTapped: () -> Void
+    
+    private var buttonIcon: String {
+         if isCurrentEpisode {
+             return isPlaying ? "pause.fill" : "play.fill"
+         } else {
+             return "play.fill"
+         }
+     }
     
     var body: some View {
         
@@ -33,13 +43,12 @@ struct EpisodeRowView: View {
                     .foregroundStyle(.secondary)
                 Spacer()
                 Button(action: onPlayTapped) {
-                    Image(systemName: "play.fill")
-                        .foregroundStyle(.white)
+                    Image(systemName: buttonIcon)
+                        .foregroundStyle(Color(.systemBackground))
                         .padding(8)
                         .background(Color.primary)
                         .clipShape(Circle())
                 }
-                .buttonStyle(.plain)
             }
             Divider()
                 .background(.gray)

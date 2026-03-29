@@ -9,7 +9,6 @@ import SwiftUI
 
 struct PodcastListView: View {
     @StateObject private var viewModel: PodcastListViewModel
-    @StateObject private var playerViewModel = PodcastPlayerViewModel()
     private let podcastAPI: PodcastAPIProtocol
     @Environment(\.colorScheme) private var colorScheme
     @State private var showFullPlayer = false
@@ -32,7 +31,7 @@ struct PodcastListView: View {
                 if viewModel.isLoading {
                     ProgressView("Loading Podcasts...")
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .foregroundColor(.white)
+                        .foregroundColor(.primary)
                 } else if let errorMessage = viewModel.errorMessage {
                     ContentUnavailableView(
                         "Something went wrong",
@@ -65,6 +64,6 @@ struct PodcastListView: View {
                 await viewModel.loadPodcastList()
             }
         }
-        .toolbarBackground(.clear, for: .navigationBar)
+        .toolbarBackground(.visible, for: .navigationBar)
     }
 }
