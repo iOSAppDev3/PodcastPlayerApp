@@ -9,17 +9,26 @@ import SwiftUI
 
 struct EpisodeRowView: View {
     let episode: Episode
-    let isCurrentEpisode: Bool
-    let isPlaying: Bool
+    let playerState: PlayerState
     let onPlayTapped: () -> Void
     
     private var buttonIcon: String {
-         if isCurrentEpisode {
-             return isPlaying ? "pause.fill" : "play.fill"
-         } else {
-             return "play.fill"
-         }
-     }
+        switch playerState {
+        case .playing(let id) where id == episode.id:
+            return "pause.fill"
+        case .paused(let id) where id == episode.id:
+            return "play.fill"
+        default:
+            return "play.fill"
+        }
+    }
+    
+    private var isLoading: Bool {
+        if case .loading(let id) = playerState {
+            return id == episode.id
+        }
+        return false
+    }
     
     var body: some View {
         
@@ -32,7 +41,7 @@ struct EpisodeRowView: View {
                 .multilineTextAlignment(.leading)
                 .foregroundStyle(.primary)
             
-            Text(episode.shortDescription)
+            Text(episode.description)
                 .font(.footnote)
                 .foregroundStyle(.primary)
                 .lineLimit(3)
@@ -43,11 +52,13 @@ struct EpisodeRowView: View {
                     .foregroundStyle(.secondary)
                 Spacer()
                 Button(action: onPlayTapped) {
-                    Image(systemName: buttonIcon)
-                        .foregroundStyle(Color(.systemBackground))
-                        .padding(8)
-                        .background(Color.primary)
-                        .clipShape(Circle())
+                    ZStack {
+                        Circle()
+                            .fill(Color.primary)
+                            .frame(width: 36, height: 36)
+                        Image(systemName: buttonIcon)
+                            .foregroundStyle(Color(.systemBackground))
+                    }
                 }
             }
             Divider()

@@ -63,9 +63,4 @@ extension Episode {
         formatter.dateStyle = .medium
         return formatter.string(from: date)
     }
-
-    var shortDescription: String {
-        description
-            .replacingOccurrences(of: "\n", with: " ")
-    }
 }

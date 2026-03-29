@@ -31,6 +31,7 @@
 		8364ADEA2F757AA6007A20B9 /* PodcastPlayerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PodcastPlayerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8364ADF82F757AA6007A20B9 /* PodcastPlayerAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PodcastPlayerAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8364AE022F757AA6007A20B9 /* PodcastPlayerAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PodcastPlayerAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8364B3522F794AA2007A20B9 /* PodcastPlayerAppTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = PodcastPlayerAppTests.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -75,6 +76,7 @@
 		8364ADE12F757AA6007A20B9 = {
 			isa = PBXGroup;
 			children = (
+				8364B3522F794AA2007A20B9 /* PodcastPlayerAppTests.xctestplan */,
 				8364ADEC2F757AA6007A20B9 /* PodcastPlayerApp */,
 				8364ADFB2F757AA6007A20B9 /* PodcastPlayerAppTests */,
 				8364ADEB2F757AA6007A20B9 /* Products */,

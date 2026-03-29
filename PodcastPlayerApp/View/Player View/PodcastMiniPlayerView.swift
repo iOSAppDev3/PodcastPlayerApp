@@ -9,7 +9,16 @@ import SwiftUI
 
 struct MiniPlayerView: View {
     @ObservedObject var playerViewModel: PodcastPlayerViewModel
-
+    
+    var miniPlayerIconName: String {
+        switch playerViewModel.playerState {
+            case .playing:
+                return "pause.fill"
+            default:
+                return "play.fill"
+        }
+    }
+    
     var body: some View {
         VStack(spacing: 8) {
             HStack(spacing: 12) {
@@ -37,9 +46,13 @@ struct MiniPlayerView: View {
                     Button {
                         playerViewModel.togglePlayPause()
                     } label: {
-                        Image(systemName: playerViewModel.isPlaying ? "pause.fill" : "play.fill")
+                        if playerViewModel.isLoading {
+                            ProgressView()
+                        } else {
+                            Image(systemName: miniPlayerIconName)
+                        }
                     }
-
+                    .disabled(playerViewModel.isLoading)
                     Button {
                         playerViewModel.skip(seconds: 10)
                     } label: {

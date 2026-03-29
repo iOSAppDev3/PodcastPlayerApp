@@ -1,0 +1,25 @@
+{
+  "configurations" : [
+    {
+      "id" : "37AB1D1B-F20F-49C7-91A4-00498C2B4441",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:PodcastPlayerApp.xcodeproj",
+        "identifier" : "8364ADF72F757AA6007A20B9",
+        "name" : "PodcastPlayerAppTests"
+      }
+    }
+  ],
+  "version" : 1
+}

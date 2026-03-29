@@ -46,11 +46,6 @@ struct EpisodeListView: View {
             guard viewModel.episodes.isEmpty else { return }
             await viewModel.loadEpisodes()
         }
-        .alert("Playback Error", isPresented: $playerViewModel.showErrorAlert) {
-            Button("OK", role: .cancel) { }
-        } message: {
-            Text(playerViewModel.errorMessage ?? "Something went wrong")
-        }
         .padding(.bottom, 20)
     }
    
@@ -88,19 +83,21 @@ struct EpisodeListView: View {
 
     private var episodesSectionView: some View {
         VStack(alignment: .leading, spacing: 8) {
+            
             Text("Episodes")
                 .font(.title.bold())
                 .foregroundStyle(.primary)
                 .frame(maxWidth: .infinity, alignment: .leading)
-
+            
             LazyVStack(spacing: 12) {
                 ForEach(viewModel.episodes) { episode in
                     EpisodeRowView(
                         episode: episode,
-                        isCurrentEpisode: playerViewModel.currentEpisode?.id == episode.id,
-                        isPlaying: playerViewModel.isPlaying,
+                        playerState: playerViewModel.playerState,
                         onPlayTapped: {
-                            playerViewModel.togglePlayback(for: episode, podcast: viewModel.podcast)
+                            Task {
+                                await playerViewModel.togglePlayback(for: episode, podcast: viewModel.podcast)
+                            }
                         }
                     )
                 }
@@ -112,12 +109,10 @@ struct EpisodeListView: View {
     private func handlePodcastPlayTapped() {
         guard let episode = viewModel.episodes.last else { return }
         Task {
-            do {
-                try await playerViewModel.play(episode: episode, podcast: viewModel.podcast)
-            } catch {
-                playerViewModel.errorMessage = error.localizedDescription
-                playerViewModel.showErrorAlert = true
-            }
+            await playerViewModel.play(
+                episode: episode,
+                podcast: viewModel.podcast
+            )
         }
     }
 }
