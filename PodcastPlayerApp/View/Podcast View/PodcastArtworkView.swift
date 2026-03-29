@@ -16,6 +16,7 @@ struct PodcastArtworkView: View {
     var body: some View {
         ZStack {
             if let url = URL(string: AppConfig.baseURLString + "/v1/images/" + (imageURLString ?? "")) {
+                /// Resizes the image before it’s loaded into memory
                 KFImage.url(url)
                     .placeholder {
                         placeholder

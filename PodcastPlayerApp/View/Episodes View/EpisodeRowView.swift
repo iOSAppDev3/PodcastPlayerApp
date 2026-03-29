@@ -23,13 +23,6 @@ struct EpisodeRowView: View {
         }
     }
     
-    private var isLoading: Bool {
-        if case .loading(let id) = playerState {
-            return id == episode.id
-        }
-        return false
-    }
-    
     var body: some View {
         
         VStack(alignment: .leading, spacing: 12) {

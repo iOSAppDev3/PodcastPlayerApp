@@ -7,6 +7,7 @@
 
 import Foundation
 
+///Model representing a list of Podcasts
 struct PodcastListResponse: Decodable {
     let limit: Int?
     let offset: Int?
@@ -14,10 +15,12 @@ struct PodcastListResponse: Decodable {
     let results: [Podcast]
 }
 
+/// Model representing a podcast detail response
 struct PodcastDetailResponse: Decodable {
     let podcast: Podcast
 }
 
+/// Model representing a podcast.
 struct Podcast: Decodable, Identifiable {
     let id: Int
     let author: String

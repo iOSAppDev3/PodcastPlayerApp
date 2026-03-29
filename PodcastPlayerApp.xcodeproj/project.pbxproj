@@ -8,17 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		8364B2482F783101007A20B9 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 8364B2472F783101007A20B9 /* Kingfisher */; };
+		8364B3AE2F796972007A20B9 /* ViewInspector in Frameworks */ = {isa = PBXBuildFile; productRef = 8364B3AD2F796972007A20B9 /* ViewInspector */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		8364ADF92F757AA6007A20B9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8364ADE22F757AA6007A20B9 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8364ADE92F757AA6007A20B9;
-			remoteInfo = PodcastPlayerApp;
-		};
-		8364AE032F757AA6007A20B9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8364ADE22F757AA6007A20B9 /* Project object */;
 			proxyType = 1;
@@ -30,7 +24,6 @@
 /* Begin PBXFileReference section */
 		8364ADEA2F757AA6007A20B9 /* PodcastPlayerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PodcastPlayerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8364ADF82F757AA6007A20B9 /* PodcastPlayerAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PodcastPlayerAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8364AE022F757AA6007A20B9 /* PodcastPlayerAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PodcastPlayerAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8364B3522F794AA2007A20B9 /* PodcastPlayerAppTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = PodcastPlayerAppTests.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -60,13 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8364ADFF2F757AA6007A20B9 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				8364B3AE2F796972007A20B9 /* ViewInspector in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,7 +75,6 @@
 			children = (
 				8364ADEA2F757AA6007A20B9 /* PodcastPlayerApp.app */,
 				8364ADF82F757AA6007A20B9 /* PodcastPlayerAppTests.xctest */,
-				8364AE022F757AA6007A20B9 /* PodcastPlayerAppUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -137,30 +123,11 @@
 			);
 			name = PodcastPlayerAppTests;
 			packageProductDependencies = (
+				8364B3AD2F796972007A20B9 /* ViewInspector */,
 			);
 			productName = PodcastPlayerAppTests;
 			productReference = 8364ADF82F757AA6007A20B9 /* PodcastPlayerAppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		8364AE012F757AA6007A20B9 /* PodcastPlayerAppUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8364AE122F757AA6007A20B9 /* Build configuration list for PBXNativeTarget "PodcastPlayerAppUITests" */;
-			buildPhases = (
-				8364ADFE2F757AA6007A20B9 /* Sources */,
-				8364ADFF2F757AA6007A20B9 /* Frameworks */,
-				8364AE002F757AA6007A20B9 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				8364AE042F757AA6007A20B9 /* PBXTargetDependency */,
-			);
-			name = PodcastPlayerAppUITests;
-			packageProductDependencies = (
-			);
-			productName = PodcastPlayerAppUITests;
-			productReference = 8364AE022F757AA6007A20B9 /* PodcastPlayerAppUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -179,10 +146,6 @@
 						CreatedOnToolsVersion = 16.4;
 						TestTargetID = 8364ADE92F757AA6007A20B9;
 					};
-					8364AE012F757AA6007A20B9 = {
-						CreatedOnToolsVersion = 16.4;
-						TestTargetID = 8364ADE92F757AA6007A20B9;
-					};
 				};
 			};
 			buildConfigurationList = 8364ADE52F757AA6007A20B9 /* Build configuration list for PBXProject "PodcastPlayerApp" */;
@@ -196,6 +159,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				8364B2462F783101007A20B9 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				8364B3AC2F796972007A20B9 /* XCRemoteSwiftPackageReference "ViewInspector" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 8364ADEB2F757AA6007A20B9 /* Products */;
@@ -204,7 +168,6 @@
 			targets = (
 				8364ADE92F757AA6007A20B9 /* PodcastPlayerApp */,
 				8364ADF72F757AA6007A20B9 /* PodcastPlayerAppTests */,
-				8364AE012F757AA6007A20B9 /* PodcastPlayerAppUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -218,13 +181,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		8364ADF62F757AA6007A20B9 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8364AE002F757AA6007A20B9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -248,13 +204,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8364ADFE2F757AA6007A20B9 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -262,11 +211,6 @@
 			isa = PBXTargetDependency;
 			target = 8364ADE92F757AA6007A20B9 /* PodcastPlayerApp */;
 			targetProxy = 8364ADF92F757AA6007A20B9 /* PBXContainerItemProxy */;
-		};
-		8364AE042F757AA6007A20B9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8364ADE92F757AA6007A20B9 /* PodcastPlayerApp */;
-			targetProxy = 8364AE032F757AA6007A20B9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -391,8 +335,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = PodcastPlayerApp/PodcastPlayerApp.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -405,13 +350,14 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 15.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bk.PodcastPlayerApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
@@ -428,8 +374,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = PodcastPlayerApp/PodcastPlayerApp.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -442,13 +389,14 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 15.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bk.PodcastPlayerApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
@@ -503,48 +451,6 @@
 			};
 			name = Release;
 		};
-		8364AE132F757AA6007A20B9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
-				MACOSX_DEPLOYMENT_TARGET = 15.5;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.bk.PodcastPlayerAppUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
-				TEST_TARGET_NAME = PodcastPlayerApp;
-				XROS_DEPLOYMENT_TARGET = 2.5;
-			};
-			name = Debug;
-		};
-		8364AE142F757AA6007A20B9 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
-				MACOSX_DEPLOYMENT_TARGET = 15.5;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.bk.PodcastPlayerAppUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
-				TEST_TARGET_NAME = PodcastPlayerApp;
-				XROS_DEPLOYMENT_TARGET = 2.5;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -575,15 +481,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8364AE122F757AA6007A20B9 /* Build configuration list for PBXNativeTarget "PodcastPlayerAppUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8364AE132F757AA6007A20B9 /* Debug */,
-				8364AE142F757AA6007A20B9 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
@@ -595,6 +492,14 @@
 				minimumVersion = 8.8.0;
 			};
 		};
+		8364B3AC2F796972007A20B9 /* XCRemoteSwiftPackageReference "ViewInspector" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nalexn/ViewInspector";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.10.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -602,6 +507,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8364B2462F783101007A20B9 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		8364B3AD2F796972007A20B9 /* ViewInspector */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8364B3AC2F796972007A20B9 /* XCRemoteSwiftPackageReference "ViewInspector" */;
+			productName = ViewInspector;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

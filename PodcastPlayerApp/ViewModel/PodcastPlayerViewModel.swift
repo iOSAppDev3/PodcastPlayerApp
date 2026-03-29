@@ -7,24 +7,54 @@
 
 import AVFoundation
 
+/// Enum represents the current state of the podcast player.
 enum PlayerState: Equatable {
+    
+    /// No episode is currently selected or playing.
     case idle
+    
+    /// An episode is currently being loaded.
     case loading(episodeID: Int)
+    
+    /// An episode is actively playing.
     case playing(episodeID: Int)
+    
+    /// Playback is paused for the current episode.
     case paused(episodeID: Int)
+    
+    /// Playback failed with an error message.
     case failed(message: String)
 }
 
+/// View model responsible for managing podcast audio playback state.
+///
+/// This class coordinates audio playback, exposes player state to the UI,
+/// and handles playback actions such as play, pause, resume, seek, and skip.
 @MainActor
 final class PodcastPlayerViewModel: ObservableObject {
+    
+    /// The currently selected episode.
     @Published var currentEpisode: Episode?
+    
+    /// The podcast associated with the current episode.
     @Published var currentPodcast: Podcast?
+    
+    /// The current playback time in seconds.
     @Published var currentTime: Double = 0
+    
+    /// The total duration of the loaded episode in seconds.
     @Published var duration: Double = 0
+    
+    /// Error message to display when playback fails.
     @Published var errorMessage: String?
+    
+    /// Controls whether an error alert should be shown.
     @Published var showErrorAlert = false
+    
+    /// The current playback state.
     @Published var playerState: PlayerState = .idle
    
+    /// Indicates whether audio is currently playing.
     var isPlaying: Bool {
         if case .playing = playerState {
             return true
@@ -32,6 +62,7 @@ final class PodcastPlayerViewModel: ObservableObject {
         return false
     }
 
+    /// Indicates whether an episode is currently loading.
     var isLoading: Bool {
         if case .loading = playerState {
             return true
@@ -39,8 +70,12 @@ final class PodcastPlayerViewModel: ObservableObject {
         return false
     }
     
+    /// Service used to handle audio playback.
     private let audioPlayer: PodcastAudioPlayerServiceProtocol
     
+    /// Creates a new player view model.
+    ///
+    /// - Parameter audioPlayer: The audio player service used for playback
     init(audioPlayer: PodcastAudioPlayerServiceProtocol = PodcastAudioPlayerService()) {
         self.audioPlayer = audioPlayer
     }
@@ -49,11 +84,22 @@ final class PodcastPlayerViewModel: ObservableObject {
         audioPlayer.removeTimeObserver()
     }
 
+    /// Returns whether the given episode is the currently selected episode.
+    ///
+    /// - Parameter episode: The episode to compare.
+    /// - Returns: `true` if the episode is currently selected, otherwise `false`.
     func isCurrentEpisode(_ episode: Episode) -> Bool {
         currentEpisode?.id == episode.id
     }
 
-    @MainActor
+    /// Loads and starts playback for the given episode.
+    ///
+    /// This method validates the episode URL, loads the audio, updates playback
+    /// metadata, starts observing time changes, and begins playback.
+    ///
+    /// - Parameters:
+    ///   - episode: The episode to play.
+    ///   - podcast: The podcast of the episode
     func play(episode: Episode, podcast: Podcast) async {
         playerState = .loading(episodeID: episode.id)
 
@@ -85,6 +131,7 @@ final class PodcastPlayerViewModel: ObservableObject {
         }
     }
 
+    /// Pauses playback of the current episode.
     func pause() {
         audioPlayer.pause()
         if let id = currentEpisode?.id {
@@ -92,6 +139,7 @@ final class PodcastPlayerViewModel: ObservableObject {
         }
     }
 
+    /// Resumes playback of the current episode.
     func resume() {
         audioPlayer.play()
         if let id = currentEpisode?.id {
@@ -99,6 +147,7 @@ final class PodcastPlayerViewModel: ObservableObject {
         }
     }
     
+    /// Toggles playback between play and pause for the current episode.
     func togglePlayPause() {
         switch playerState {
         case .playing:
@@ -109,32 +158,26 @@ final class PodcastPlayerViewModel: ObservableObject {
             break
         }
     }
-    
-    func togglePlayback(for episode: Episode, podcast: Podcast) async {
-        switch playerState {
-        case .loading(let id) where id == episode.id:
-            return // ignore taps while loading
 
-        case .playing(let id) where id == episode.id:
-            pause()
-
-        case .paused(let id) where id == episode.id:
-            resume()
-
-        default:
-            await play(episode: episode, podcast: podcast)
-        }
-    }
-
+    /// Skips playback forward or backward by the given number of seconds.
+    ///
+    /// - Parameter seconds: Positive to skip forward, negative to skip backward
     func skip(seconds: Double) {
         audioPlayer.skip(seconds: seconds)
     }
 
+    /// Seeks playback to a specific time.
+    ///
+    /// - Parameter time: The target playback time in seconds.
     func seek(to time: Double) {
         audioPlayer.seek(to: time)
         currentTime = time
     }
 
+    /// Formats a time interval in seconds as a `mm:ss` string.
+    ///
+    /// - Parameter seconds: The time interval in seconds.
+    /// - Returns: A formatted time string.
     func formatTime(_ seconds: Double) -> String {
         guard !seconds.isNaN && !seconds.isInfinite else { return "00:00" }
         let mins = Int(seconds) / 60

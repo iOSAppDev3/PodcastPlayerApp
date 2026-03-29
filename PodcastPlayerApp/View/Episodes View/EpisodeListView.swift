@@ -49,12 +49,14 @@ struct EpisodeListView: View {
         .padding(.bottom, 20)
     }
    
+    /// Loading UI State
     private var loadingView: some View {
         ProgressView("Loading Episodes...")
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .foregroundStyle(.primary)
     }
 
+    /// Error UI State
     private func errorView(message: String) -> some View {
         ContentUnavailableView(
             "Unable to load episodes",
@@ -63,6 +65,7 @@ struct EpisodeListView: View {
         )
     }
 
+    /// Main content view when data is loaded.
     private var loadedView: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
@@ -72,6 +75,7 @@ struct EpisodeListView: View {
         }
     }
 
+    /// Displays podcast details and a play button for the latest episode.
     private var podcastHeaderView: some View {
         PodcastDetailView(
             podcast: viewModel.podcast,
@@ -80,7 +84,19 @@ struct EpisodeListView: View {
             onPlayTapped: handlePodcastPlayTapped
         )
     }
+    
+    /// Handles tapping play on the podcast header (plays latest episode).
+    private func handlePodcastPlayTapped() {
+        guard let episode = viewModel.episodes.last else { return }
+        Task {
+            await playerViewModel.play(
+                episode: episode,
+                podcast: viewModel.podcast
+            )
+        }
+    }
 
+    /// Displays the list of episodes.
     private var episodesSectionView: some View {
         VStack(alignment: .leading, spacing: 8) {
             
@@ -96,7 +112,7 @@ struct EpisodeListView: View {
                         playerState: playerViewModel.playerState,
                         onPlayTapped: {
                             Task {
-                                await playerViewModel.togglePlayback(for: episode, podcast: viewModel.podcast)
+                                await playerViewModel.play(episode: episode, podcast: viewModel.podcast)
                             }
                         }
                     )
@@ -104,15 +120,5 @@ struct EpisodeListView: View {
             }
         }
         .padding(20)
-    }
-
-    private func handlePodcastPlayTapped() {
-        guard let episode = viewModel.episodes.last else { return }
-        Task {
-            await playerViewModel.play(
-                episode: episode,
-                podcast: viewModel.podcast
-            )
-        }
     }
 }
