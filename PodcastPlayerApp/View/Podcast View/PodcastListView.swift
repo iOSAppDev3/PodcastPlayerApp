@@ -26,7 +26,7 @@ struct PodcastListView: View {
     var body: some View {
         ZStack {
             AppGradients.appBackground(for: colorScheme)
-            
+                .ignoresSafeArea()
             ScrollView {
                 if viewModel.isLoading {
                     ProgressView("Loading Podcasts...")
@@ -59,6 +59,7 @@ struct PodcastListView: View {
             }
         }
         .navigationTitle("Podcasts")
+        .navigationBarTitleDisplayMode(.inline)
         .task {
             if viewModel.podcastList.isEmpty {
                 await viewModel.loadPodcastList()

@@ -17,7 +17,7 @@ struct PodcastPlayerView: View {
     var body: some View {
         ZStack {
             AppGradients.appBackground(for: colorScheme)
-
+                .ignoresSafeArea()
             VStack(spacing: 24) {
                 HStack {
                     Spacer()
